@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h2 class="mb-4">🏆 Hall of Fame</h2>
+    <p class="lead mb-4">The cutest pets according to the community</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <table class="table table-hover align-middle shadow-sm bg-white rounded">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">Pet</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">ELO Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pet in pets %}
+                        <tr>
+                            <td class="fw-bold fs-5">{{ loop.index }}</td>
+
+                            <td>
+                                <img src="/{{ pet.image_path }}" alt="{{ pet.name }}"
+                                     style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
+                            </td>
+
+                            <td class="fs-5">{{ pet.name }}</td>
+
+                            <td class="fw-bold text-success">{{ pet.elo_rating | int }} 📈</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center py-4">No pets in the ranking yet</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

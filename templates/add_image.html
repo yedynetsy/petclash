@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h2 class="mb-4">📷 Add a Pet</h2>
+
+    <form action="/add_image" method="post" enctype="multipart/form-data" class="w-50 mx-auto">
+
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control" name="name" placeholder="Pet's Name" type="text" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="image" class="form-label text-start d-block">Choose a cute photo:</label>
+            <input class="form-control" name="image" id="image" type="file" accept="image/*" required>
+        </div>
+
+        <button class="btn btn-success" type="submit">Upload Pet</button>
+
+    </form>
+{% endblock %}
