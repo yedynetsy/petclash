@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h1 class="mb-4">🐾 Who is cuter?</h1>
+
+    {% if pet1 and pet2 %}
+        <p class="lead">Click on the photo of your favorite pet to vote</p>
+
+        <div class="row mt-3 justify-content-center">
+
+            <div class="col-md-3">
+                <div class="card p-4 shadow-sm mb-4 h-100">
+                    <h3 class="mb-3">{{ pet1.name }}</h3>
+
+                    <form action="/vote" method="post">
+                        <input type="hidden" name="winner_id" value="{{ pet1.id }}">
+                        <input type="hidden" name="loser_id" value="{{ pet2.id }}">
+
+                        <button type="submit" class="btn p-0 border-0 w-100">
+                            <img src="/{{ pet1.image_path }}" class="img-fluid rounded" style="height: 200px; width: 100%; object-fit: cover;" alt="{{ pet1.name }}">
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-4 shadow-sm mb-4 h-100">
+                    <h3 class="mb-3">{{ pet2.name }}</h3>
+
+                    <form action="/vote" method="post">
+                        <input type="hidden" name="winner_id" value="{{ pet2.id }}">
+                        <input type="hidden" name="loser_id" value="{{ pet1.id }}">
+
+                        <button type="submit" class="btn p-0 border-0 w-100">
+                            <img src="/{{ pet2.image_path }}" class="img-fluid rounded" style="height: 200px; width: 100%; object-fit: cover;" alt="{{ pet2.name }}">
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    {% else %}
+        <div class="alert alert-warning mt-5 w-50 mx-auto">
+            <p class="mb-0">Not enough pets in the database to start</p>
+            {% if session["user_id"] %}
+                <a href="/add_image" class="alert-link">Add some pets</a>
+            {% else %}
+                <p class="mb-0 mt-2">Log in to add some pets</p>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
